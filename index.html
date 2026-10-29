@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      Database Mastery: SQL, PostgreSQL, MongoDB, Redis &amp; Prisma
+    </title>
+    <meta
+      name="description"
+      content="Free interactive roadmap to master databases: SQL vs NoSQL, MySQL vs PostgreSQL, PostgreSQL, MongoDB, Redis, Prisma ORM, projects and system design."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button class="btn" id="menuBtn" aria-label="Menu">☰</button>
+      <div class="brand">🗄️ DB<span>Mastery</span></div>
+      <div class="grow"></div>
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Search lessons… (e.g. index, join)"
+        aria-label="Search lessons"
+      />
+      <button class="btn" id="themeBtn" aria-label="Toggle theme">🌓</button>
+    </header>
+    <div class="progress"><i id="pbar"></i></div>
+
+    <div class="layout">
+      <nav class="side" id="side">
+        <div class="grp">Start</div>
+        <a href="#start">Roadmap</a>
+        <a href="#sql-vs-nosql">SQL vs NoSQL</a>
+        <a href="#mysql-vs-pg">MySQL vs PostgreSQL</a>
+        <div class="grp">Learn</div>
+        <a href="#pg">🐘 PostgreSQL</a>
+        <a href="#mongo">🍃 MongoDB</a>
+        <a href="#redis">⚡ Redis</a>
+        <a href="#prisma">🔺 Prisma ORM</a>
+        <div class="grp">Apply</div>
+        <a href="#concepts">Core concepts</a>
+        <a href="#projects">DB projects</a>
+        <a href="#system-design">System design</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#resources">All free resources</a>
+        <div class="grp">Progress</div>
+        <div style="padding: 0 10px; font-size: 0.85rem; color: var(--muted)">
+          <span id="ptxt">0/0</span><br /><button
+            class="btn"
+            id="resetProgress"
+            style="margin-top: 6px; font-size: 0.78rem"
+          >
+            Reset
+          </button>
+        </div>
+        <div
+          id="searchInfo"
+          style="padding: 10px; font-size: 0.8rem; color: var(--acc2)"
+        ></div>
+      </nav>
+
+      <main>
+        <div class="hero">
+          <h1>Master <em>Databases</em> from zero to industry</h1>
+          <p>
+            SQL vs NoSQL, MySQL vs PostgreSQL, then deep dives into PostgreSQL,
+            MongoDB, Redis and Prisma, with database projects and system design
+            explained for beginners. Every topic has free resources.
+          </p>
+          <div class="chips">
+            <span class="chip">🐘 PostgreSQL</span
+            ><span class="chip">🍃 MongoDB</span
+            ><span class="chip">⚡ Redis</span
+            ><span class="chip">🔺 Prisma</span
+            ><span class="chip">🧱 10 projects</span
+            ><span class="chip">🏗️ 7 system designs</span
+            ><span class="chip">✅ progress tracking</span>
+          </div>
+        </div>
+
+        <!-- ============ START ============ -->
+        <section class="sec" id="start">
+          <h2>🗺️ Your roadmap</h2>
+          <p class="lead">
+            Follow the phases in order. Tick lessons as you finish them; your
+            progress is saved in your browser. Rule:
+            <b>read a little, then type every example yourself</b>. Databases
+            are learned with your fingers.
+          </p>
+          <div class="timeline">
+            <div class="card">
+              <h3>SQL &amp; Postgres basics</h3>
+              <p>
+                Tables, CRUD, joins, aggregates. Do the first 5 PostgreSQL
+                lessons + SQLBolt.
+              </p>
+              <span class="tag">~2 weeks</span>
+            </div>
+            <div class="card">
+              <h3>Design &amp; performance</h3>
+              <p>
+                Normalization, CTEs, window functions, indexes, EXPLAIN.
+                Projects 1 &amp; 2.
+              </p>
+              <span class="tag">~3 weeks</span>
+            </div>
+            <div class="card">
+              <h3>Transactions &amp; Prisma</h3>
+              <p>
+                ACID, locks, then Prisma ORM on Postgres. Projects 3 &amp; 8.
+              </p>
+              <span class="tag">~2 weeks</span>
+            </div>
+            <div class="card">
+              <h3>MongoDB &amp; Redis</h3>
+              <p>
+                Document modeling, aggregation, caching, rate limiting. Projects
+                4, 5, 6.
+              </p>
+              <span class="tag">~3 weeks</span>
+            </div>
+            <div class="card">
+              <h3>Industry &amp; system design</h3>
+              <p>
+                Replication, sharding, pooling, polyglot systems. Projects 7, 9,
+                10 + design problems.
+              </p>
+              <span class="tag">~4 weeks</span>
+            </div>
+          </div>
+          <div class="callout">
+            <b>Free practice databases:</b> Docker (<code>postgres</code>,
+            <code>mongo</code>, <code>redis</code> images),
+            <a href="https://neon.tech" target="_blank" rel="noopener">Neon</a>
+            /
+            <a href="https://supabase.com" target="_blank" rel="noopener"
+              >Supabase</a
+            >
+            for Postgres,
+            <a
+              href="https://www.mongodb.com/atlas"
+              target="_blank"
+              rel="noopener"
+              >MongoDB Atlas</a
+            >
+            free tier,
+            <a href="https://upstash.com" target="_blank" rel="noopener"
+              >Upstash</a
+            >
+            / Redis Cloud for Redis.
+          </div>
+        </section>
+
+        <!-- ============ SQL vs NoSQL ============ -->
+        <section class="sec" id="sql-vs-nosql">
+          <h2>⚔️ SQL vs NoSQL</h2>
+          <p class="lead">
+            <b>SQL (relational)</b> databases store data in tables with a fixed
+            schema and relationships, queried with SQL. <b>NoSQL</b> ("not only
+            SQL") is a family of different models built for different problems:
+            documents, key-value, wide-column, graph. It is not "one thing", and
+            it is not "better" or "worse".
+          </p>
+
+          <div class="tablewrap">
+            <table>
+              <tr>
+                <th>Aspect</th>
+                <th>SQL (PostgreSQL, MySQL)</th>
+                <th>NoSQL (MongoDB, Redis, Cassandra…)</th>
+              </tr>
+              <tr>
+                <td>Data model</td>
+                <td>Tables, rows, columns, foreign keys</td>
+                <td>Documents / key-value / wide-column / graph</td>
+              </tr>
+              <tr>
+                <td>Schema</td>
+                <td>Strict, defined up front (migrations to change)</td>
+                <td>Flexible; app (or validation rules) decides</td>
+              </tr>
+              <tr>
+                <td>Relationships</td>
+                <td>First-class: JOINs, constraints</td>
+                <td>Embed or reference manually; joins are limited</td>
+              </tr>
+              <tr>
+                <td>Transactions</td>
+                <td>Strong ACID, multi-table</td>
+                <td>
+                  Varies: single-document atomic; multi-doc possible but
+                  costlier
+                </td>
+              </tr>
+              <tr>
+                <td>Scaling</td>
+                <td>Vertical first; read replicas; sharding is harder</td>
+                <td>Many are designed for horizontal scaling</td>
+              </tr>
+              <tr>
+                <td>Query power</td>
+                <td>Very rich ad-hoc queries, aggregations</td>
+                <td>Great for known access patterns; ad-hoc can be limited</td>
+              </tr>
+              <tr>
+                <td>Consistency</td>
+                <td>Strong by default</td>
+                <td>Often tunable / eventual</td>
+              </tr>
+              <tr>
+                <td>Best for</td>
+                <td>Finance, e-commerce, ERP, anything relational</td>
+                <td>
+                  Content, catalogs, caching, real-time, huge scale, flexible
+                  data
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <h3>When and where to use what</h3>
+          <div class="grid g3">
+            <div class="card">
+              <h3>🐘 Relational (Postgres/MySQL)</h3>
+              <p>
+                <b>Use for:</b> users, orders, payments, inventory, bookings,
+                reporting.
+              </p>
+              <p class="pro">
+                ✔ ACID, joins, constraints, mature tooling, SQL skills transfer
+                everywhere
+              </p>
+              <p class="con">
+                ✘ Schema changes need care; horizontal write scaling is hard
+              </p>
+            </div>
+            <div class="card">
+              <h3>📄 Document (MongoDB)</h3>
+              <p>
+                <b>Use for:</b> CMS, product catalogs, user profiles, event
+                logs, prototypes with changing shape.
+              </p>
+              <p class="pro">
+                ✔ Flexible schema, natural JSON, easy horizontal scaling
+              </p>
+              <p class="con">
+                ✘ Weak at many-to-many relations; data duplication; easy to
+                design badly
+              </p>
+            </div>
+            <div class="card">
+              <h3>⚡ Key-value / in-memory (Redis)</h3>
+              <p>
+                <b>Use for:</b> cache, sessions, rate limiting, leaderboards,
+                queues, real-time counters.
+              </p>
+              <p class="pro">✔ Microsecond speed, rich structures, TTL</p>
+              <p class="con">
+                ✘ RAM is costly and limited; not a primary store for complex
+                data
+              </p>
+            </div>
+            <div class="card">
+              <h3>🧱 Wide-column (Cassandra, ScyllaDB)</h3>
+              <p>
+                <b>Use for:</b> massive write-heavy time-series, messaging, IoT.
+              </p>
+              <p class="pro">✔ Linear scalability, high availability</p>
+              <p class="con">✘ Must design tables per query; no joins</p>
+            </div>
+            <div class="card">
+              <h3>🕸️ Graph (Neo4j)</h3>
+              <p>
+                <b>Use for:</b> social graphs, recommendations, fraud rings.
+              </p>
+              <p class="pro">✔ Relationship traversal is fast and natural</p>
+              <p class="con">✘ Niche; harder to scale; smaller ecosystem</p>
+            </div>
+            <div class="card">
+              <h3>🔎 Search (Elasticsearch, Meilisearch)</h3>
+              <p>
+                <b>Use for:</b> full-text search, autocomplete, log analysis.
+              </p>
+              <p class="pro">✔ Relevance ranking, typo tolerance</p>
+              <p class="con">✘ Not a source of truth; eventual consistency</p>
+            </div>
+          </div>
+          <div class="callout">
+            <b>Industry reality:</b> most products start with <b>PostgreSQL</b>,
+            add <b>Redis</b> for caching/sessions, and bring in
+            MongoDB/Elasticsearch/Kafka only when a real need appears. Using
+            several databases together is called <i>polyglot persistence</i>.
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h3>🤔 Which database should I use? (interactive)</h3>
+            <div id="dh"></div>
+          </div>
+        </section>
+
+        <!-- ============ MySQL vs PostgreSQL ============ -->
+        <section class="sec" id="mysql-vs-pg">
+          <h2>🥊 MySQL vs PostgreSQL</h2>
+          <p class="lead">
+            Both are excellent open-source relational databases. MySQL has
+            historically been loved for simplicity and speed on simple reads;
+            PostgreSQL for correctness, features and extensibility.
+          </p>
+          <div class="tablewrap">
+            <table>
+              <tr>
+                <th>Feature</th>
+                <th>MySQL</th>
+                <th>PostgreSQL</th>
+              </tr>
+              <tr>
+                <td>Philosophy</td>
+                <td>Simple, fast, easy to run</td>
+                <td>Standards-compliant, feature-rich, extensible</td>
+              </tr>
+              <tr>
+                <td>SQL features</td>
+                <td>
+                  Good; CTEs and window functions exist in modern versions
+                </td>
+                <td>
+                  Very advanced: full CTEs, window functions, lateral joins,
+                  many index types
+                </td>
+              </tr>
+              <tr>
+                <td>JSON</td>
+                <td>JSON type</td>
+                <td>
+                  <code>jsonb</code> (binary, indexable with GIN), very strong
+                </td>
+              </tr>
+              <tr>
+                <td>Data types</td>
+                <td>Standard set</td>
+                <td>Arrays, ranges, enums, uuid, geometric, custom types</td>
+              </tr>
+              <tr>
+                <td>Extensions</td>
+                <td>Limited</td>
+                <td>Huge ecosystem: PostGIS, pgvector, pg_trgm, TimescaleDB</td>
+              </tr>
+              <tr>
+                <td>Concurrency</td>
+                <td>InnoDB MVCC</td>
+                <td>MVCC; strong at complex concurrent workloads</td>
+              </tr>
+              <tr>
+                <td>Replication</td>
+                <td>Mature, simple setups</td>
+                <td>Streaming + logical replication</td>
+              </tr>
+              <tr>
+                <td>Ecosystem / hosting</td>
+                <td>Everywhere, classic LAMP/WordPress world</td>
+                <td>Everywhere in modern stacks (Supabase, Neon, RDS…)</td>
+              </tr>
+              <tr>
+                <td>Learning curve</td>
+                <td>Gentle</td>
+                <td>Gentle start, deeper end</td>
+              </tr>
+            </table>
+          </div>
+          <div class="grid g2">
+            <div class="card">
+              <h3>Pick MySQL when…</h3>
+              <ul>
+                <li>You work with WordPress/legacy PHP/existing MySQL stack</li>
+                <li>Simple read-heavy app and team already knows it</li>
+                <li>Your host/tooling is built around it</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Pick PostgreSQL when…</h3>
+              <ul>
+                <li>Starting a new project (a sensible default)</li>
+                <li>
+                  You want jsonb, full-text search, geo, vectors, advanced SQL
+                </li>
+                <li>Data integrity and complex queries matter</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <b>Verdict for you:</b> learn <b>PostgreSQL</b> deeply. The SQL you
+            learn works 90% the same in MySQL, so you lose nothing, and Postgres
+            is the favourite in modern full-stack and startup stacks (and pairs
+            beautifully with Prisma).
+          </div>
+        </section>
+
+        <!-- ============ PostgreSQL ============ -->
+        <section class="sec" id="pg">
+          <div class="card" id="join-lab" style="margin-bottom: 18px">
+            <h3>🔗 Join Visualizer</h3>
+            <p class="mini">
+              Choose a join type and watch which rows survive. Highlighted rows
+              are used in the result.
+            </p>
+            <div class="tabs" id="joinTabs">
+              <button class="on" data-t="INNER">INNER</button
+              ><button data-t="LEFT">LEFT</button
+              ><button data-t="RIGHT">RIGHT</button
+              ><button data-t="FULL">FULL</button>
+            </div>
+            <div class="vz">
+              <div>
+                <b>users</b>
+                <div class="tablewrap">
+                  <table class="mini">
+                    <tr>
+                      <th>id</th>
+                      <th>name</th>
+                    </tr>
+                    <tbody id="jvU"></tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <b>orders</b>
+                <div class="tablewrap">
+                  <table class="mini">
+                    <tr>
+                      <th>id</th>
+                      <th>user_id</th>
+                      <th>item</th>
+                    </tr>
+                    <tbody id="jvO"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <pre><code id="jvSQL"></code></pre>
+            <b>Result</b>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th>name</th>
+                  <th>order id</th>
+                  <th>item</th>
+                </tr>
+                <tbody id="jvR"></tbody>
+              </table>
+            </div>
+            <p class="mini" id="jvNote"></p>
+          </div>
+          <div id="track-pg"></div>
+        </section>
+
+        <section class="sec" id="mongo"><div id="track-mongo"></div></section>
+        <section class="sec" id="redis"><div id="track-redis"></div></section>
+        <section class="sec" id="prisma"><div id="track-prisma"></div></section>
+
+        <!-- ============ Concepts ============ -->
+        <section class="sec" id="concepts">
+          <h2>🧠 Core concepts in plain English</h2>
+          <p class="lead">
+            These ideas show up in every interview and every system design.
+            Learn the analogy first, the jargon second.
+          </p>
+          <div class="grid g2" id="concepts-grid"></div>
+        </section>
+
+        <!-- ============ Projects ============ -->
+        <section class="sec" id="projects">
+          <h2>🧱 Database-first projects</h2>
+          <p class="lead">
+            Ten projects ordered from beginner to industry. Each focuses on
+            <b>database design and behaviour</b>, not UI. Build a tiny API or
+            just SQL scripts. Put each one on GitHub with a README.
+          </p>
+          <div id="projects-list"></div>
+        </section>
+
+        <!-- ============ System Design ============ -->
+        <section class="sec" id="system-design">
+          <h2>🏗️ System design problems (explained simply)</h2>
+          <p class="lead">
+            Every problem follows the same five questions:
+            <b
+              >What must it do → Which database → Data model → How it works →
+              How it scales</b
+            >. Start with the 🧒 analogy, then read the details.
+          </p>
+          <div class="callout">
+            <b>Interview method:</b> 1) clarify requirements, 2) estimate size
+            (users, reads/writes per second, storage), 3) pick data stores and
+            justify, 4) draw the main flow, 5) find bottlenecks, 6) discuss
+            trade-offs. Saying "it depends because…" with reasons is the right
+            answer.
+          </div>
+          <div id="sd-list"></div>
+          <div class="res">
+            <b>Free system design learning:</b>
+            <a
+              href="https://github.com/donnemartin/system-design-primer"
+              target="_blank"
+              rel="noopener"
+              >System Design Primer ↗</a
+            >
+            <a
+              href="https://github.com/ByteByteGoHq/system-design-101"
+              target="_blank"
+              rel="noopener"
+              >System Design 101 ↗</a
+            >
+            <a
+              href="https://www.youtube.com/results?search_query=system+design+interview+database+choice"
+              target="_blank"
+              rel="noopener"
+              >YouTube: system design ↗</a
+            >
+            <a
+              href="https://15445.courses.cs.cmu.edu/"
+              target="_blank"
+              rel="noopener"
+              >CMU Database course ↗</a
+            >
+          </div>
+        </section>
+
+        <!-- ============ Quiz ============ -->
+        <section class="sec" id="quiz">
+          <h2>📝 Quick quiz</h2>
+          <p class="lead">
+            Eight questions to check yourself. Click an answer.
+          </p>
+          <div id="quizbox"></div>
+        </section>
+
+        <!-- ============ Resources ============ -->
+        <section class="sec" id="resources">
+          <h2>📚 All free resources</h2>
+          <p class="lead">
+            Everything here is free (some sites have optional paid tiers). Docs
+            first, videos second.
+          </p>
+          <div class="grid g3">
+            <div class="card">
+              <h3>SQL practice</h3>
+              <ul>
+                <li>
+                  <a href="https://sqlbolt.com/" target="_blank" rel="noopener"
+                    >SQLBolt</a
+                  >
+                </li>
+                <li>
+                  <a href="https://sqlzoo.net/" target="_blank" rel="noopener"
+                    >SQLZoo</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://pgexercises.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >PG Exercises</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://mode.com/sql-tutorial/"
+                    target="_blank"
+                    rel="noopener"
+                    >Mode SQL Tutorial</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://mystery.knightlab.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >SQL Murder Mystery</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>PostgreSQL</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://www.postgresql.org/docs/current/"
+                    target="_blank"
+                    rel="noopener"
+                    >Official docs</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.postgresqltutorial.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >PostgreSQL Tutorial</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://use-the-index-luke.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >Use The Index, Luke</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://explain.dalibo.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >EXPLAIN visualizer</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://roadmap.sh/postgresql-dba"
+                    target="_blank"
+                    rel="noopener"
+                    >roadmap.sh PostgreSQL DBA</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.interdb.jp/pg/"
+                    target="_blank"
+                    rel="noopener"
+                    >Internals of PostgreSQL</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>MongoDB</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://learn.mongodb.com/"
+                    target="_blank"
+                    rel="noopener"
+                    >MongoDB University</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.mongodb.com/docs/manual/"
+                    target="_blank"
+                    rel="noopener"
+                    >Manual</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.mongodb.com/docs/manual/data-modeling/"
+                    target="_blank"
+                    rel="noopener"
+                    >Data modeling</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.mongodb.com/atlas"
+                    target="_blank"
+                    rel="noopener"
+                    >Atlas free tier</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Redis</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://redis.io/docs/latest/"
+                    target="_blank"
+                    rel="noopener"
+                    >Docs</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://university.redis.io/"
+                    target="_blank"
+                    rel="noopener"
+                    >Redis University</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://redis.io/learn"
+                    target="_blank"
+                    rel="noopener"
+                    >Redis Learn</a
+                  >
+                </li>
+                <li>
+                  <a href="https://upstash.com/" target="_blank" rel="noopener"
+                    >Upstash free Redis</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Prisma</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://www.prisma.io/docs"
+                    target="_blank"
+                    rel="noopener"
+                    >Prisma docs</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.prisma.io/docs/getting-started"
+                    target="_blank"
+                    rel="noopener"
+                    >Getting started</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.prisma.io/docs/orm/prisma-client/queries/transactions"
+                    target="_blank"
+                    rel="noopener"
+                    >Transactions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.prisma.io/docs/orm/prisma-migrate"
+                    target="_blank"
+                    rel="noopener"
+                    >Migrate</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Theory &amp; design</h3>
+              <ul>
+                <li>
+                  <a
+                    href="https://15445.courses.cs.cmu.edu/"
+                    target="_blank"
+                    rel="noopener"
+                    >CMU 15-445 Database Systems</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/donnemartin/system-design-primer"
+                    target="_blank"
+                    rel="noopener"
+                    >System Design Primer</a
+                  >
+                </li>
+                <li>
+                  <a href="https://dbdiagram.io/" target="_blank" rel="noopener"
+                    >dbdiagram.io (ERD)</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/results?search_query=freecodecamp+database+course"
+                    target="_blank"
+                    rel="noopener"
+                    >freeCodeCamp videos</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          Built for learning. Open <code>index.html</code> locally or host on
+          GitHub Pages.<br />
+          <small
+            >Tip: always read the official docs of the version you run; features
+            and defaults change.</small
+          >
+        </footer>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
